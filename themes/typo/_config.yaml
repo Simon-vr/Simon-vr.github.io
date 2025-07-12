@@ -1,4 +1,4 @@
-title: typo
+title: SimonNode
 favicon: /icon.svg
 icon: /icon.svg
 
@@ -6,4 +6,5 @@ menu:
   archives: /archives
   about: /about
 
-copyright: 2024 typo
+
+copyright: 本站由Hexo&ThemeTypo强力驱动
