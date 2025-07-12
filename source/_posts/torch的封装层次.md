@@ -1,11 +1,14 @@
 ---
 title: torch的封装层次
-categories: 
-  - 技术实践  
-tag:   
+categories:
+  - 技术实践
+tag:
   - 转载
   - pytorch
+date: 2025-07-12 16:21:40
+tags:
 ---
+
 > Simon: 作为初学者,这篇文章对我非常有帮助。如果直接看pytorch的组织结构[github](https://github.com/pytorch/pytorch)，总是一头雾水，这篇文章提供了一个帮助，去了解pytorch是怎样一步步组织起来的。  
 
 
