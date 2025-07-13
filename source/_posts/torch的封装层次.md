@@ -2,23 +2,20 @@
 title: torch的封装层次
 categories:
   - 技术实践
-tag:
+tags:
   - 转载
   - pytorch
 date: 2025-07-12 16:21:40
-tags:
 ---
+> Simon: 作为初学者,这篇文章对我非常有帮助。如果直接看pytorch的组织结构[github](https://github.com/pytorch/pytorch)，总是一头雾水，这篇文章提供了一个帮助，去了解pytorch是怎样一步步组织起来的。
 
-> Simon: 作为初学者,这篇文章对我非常有帮助。如果直接看pytorch的组织结构[github](https://github.com/pytorch/pytorch)，总是一头雾水，这篇文章提供了一个帮助，去了解pytorch是怎样一步步组织起来的。  
+> 0. cuda算子，一般是由核函数组成的.cu和.cpp文件
+> 1. cuda封装，提供参数，调用算子，不进行存储
+> 2. autograd算子，存储求导所需要的临时变量
+> 3. function封装，在上一层的基础上做一些健壮性工作
+> 4. Module封装，把函数封装成类，为的是实现永久性存储
 
-
-> 0. cuda算子，一般是由核函数组成的.cu和.cpp文件     
-> 1. cuda封装，提供参数，调用算子，不进行存储    
-> 2. autograd算子，存储求导所需要的临时变量    
-> 3. function封装，在上一层的基础上做一些健壮性工作    
-> 4. Module封装，把函数封装成类，为的是实现永久性存储  
-
-torch中同一个功能，不同层级的封装有什么用？我应该用什么层级的封装？  
+torch中同一个功能，不同层级的封装有什么用？我应该用什么层级的封装？
 -------------------------------------------------------------------
 
 1:首先我们说在torch中你能看到的最基础封装是cuda封装，或者叫[cuda算子](https://zhida.zhihu.com/search?content_id=691781227&content_type=Answer&match_order=1&q=cuda%E7%AE%97%E5%AD%90&zhida_source=entity)，我们算它是1级封装。（方便起见我们这里忽略triton等其他方式实现的算子）
@@ -34,9 +31,9 @@ GEMM_cuda.bwd(grad_o,mat1,mat2)
 
 c++这个层级的算子只负责计算，计算之后相应的内存空间就销毁，不会存储任何东西。
 
-但我们知道torch是支持自动求导的，自动求导是依据链式法则实现的。一个简单的乘法：y=wx，计算w的导数：dy/dw = x，你会发现w的导数就是x，那么在我们计算w的导数时，就需要知道x，而x是正向传播时传递过来的，因此我们需要在正向传播时存下这个x。上面又说了cuda算子只负责计算，不负责存储，那么我们就需要更高一级的封装，来存储这些求导所使用的临时变量。  
+但我们知道torch是支持自动求导的，自动求导是依据链式法则实现的。一个简单的乘法：y=wx，计算w的导数：dy/dw = x，你会发现w的导数就是x，那么在我们计算w的导数时，就需要知道x，而x是正向传播时传递过来的，因此我们需要在正向传播时存下这个x。上面又说了cuda算子只负责计算，不负责存储，那么我们就需要更高一级的封装，来存储这些求导所使用的临时变量。
 
----  
+---
 
 2: 在cuda算子之上的2级封装是[autograd算子](https://zhida.zhihu.com/search?content_id=691781227&content_type=Answer&match_order=1&q=autograd%E7%AE%97%E5%AD%90&zhida_source=entity)，它是通过继承torch.autograd.Function来实现的。这个层级的封装就是为了存储求导所需要的临时变量。从这一个层级开始就都是python代码了。
 
@@ -66,9 +63,9 @@ class TensorModelParallelCrossEntropy(torch.autograd.Function):
 ce_loss = TensorModelParallelCrossEntropy.apply(logits,labels)
 ```
 
-你可以看到调用这种算子并不是通过使用它的forward或者backward函数，而是使用apply函数。这里torch会进行一些封装，例如调用apply后，会用forward进行计算，并将backward添加到tensor的grad_fn属性计算图中，求导时自动调用。会在使用了torch.no_grad()上下文，不需要求导时，自动抛弃掉save_for_backward存储的张量。但是这种层级用的也不是太常见，首先观察forward函数的输入参数和backward的输出参数。backward函数返回的梯度数量必须和forward输入参数的数量相同，但是可以用None占位。比如target是标签，label_smoothing是超参，不可学习，不需要导数，这里就会用None占位。因此当你需要某一个功能的时候，需要严格的选择你需要的autograd算子，达到最佳的计算效率，不需要计算的东西不要算。  
+你可以看到调用这种算子并不是通过使用它的forward或者backward函数，而是使用apply函数。这里torch会进行一些封装，例如调用apply后，会用forward进行计算，并将backward添加到tensor的grad_fn属性计算图中，求导时自动调用。会在使用了torch.no_grad()上下文，不需要求导时，自动抛弃掉save_for_backward存储的张量。但是这种层级用的也不是太常见，首先观察forward函数的输入参数和backward的输出参数。backward函数返回的梯度数量必须和forward输入参数的数量相同，但是可以用None占位。比如target是标签，label_smoothing是超参，不可学习，不需要导数，这里就会用None占位。因此当你需要某一个功能的时候，需要严格的选择你需要的autograd算子，达到最佳的计算效率，不需要计算的东西不要算。
 
----  
+---
 
 3: 接下来就是第3级function封装。function封装的作用就是增加autograd算子的灵活性和健壮性，比如做一些异常检测，默认值填补，找到合适的autograd算子分发等等，比如这样：
 
@@ -93,7 +90,7 @@ dropout(input,p=0.1,training=True)
 
 比如看到linear函数，它的输入有input、weight、bias，其中input是一个临时变量，你的模型输入数据了，input就有，不输入就没有，输入不同的值input也不同。但是weight和bias是模型定义的时候就存在的，与你是否正向传播无关，也不会随着你输入input的值不同而改变。看到dropout函数，丢弃率p和模型当前是处于训练状态还是推理状态，也不是一个会每次都变的值。所以我们还需要一层封装来存储这些不会临时改变的东西。
 
----  
+---
 
 4:这第4级封装就是torch的Module级别封装，也就是题主题目中提到的“用类实现”。类似这个样子：
 
