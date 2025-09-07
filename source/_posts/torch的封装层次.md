@@ -7,7 +7,7 @@ tags:
   - pytorch
 date: 2025-07-12 16:21:40
 ---
-> Simon: 作为初学者,这篇文章对我非常有帮助。如果直接看pytorch的组织结构[github](https://github.com/pytorch/pytorch)，总是一头雾水，这篇文章提供了一个帮助，去了解pytorch是怎样一步步组织起来的。
+> 作为初学者,这篇文章对我非常有帮助。如果直接看pytorch的组织结构[github](https://github.com/pytorch/pytorch)，总是一头雾水，这篇文章提供了一个帮助，去了解pytorch是怎样一步步组织起来的。
 
 > 0. cuda算子，一般是由核函数组成的.cu和.cpp文件
 > 1. cuda封装，提供参数，调用算子，不进行存储

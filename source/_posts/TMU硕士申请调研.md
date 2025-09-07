@@ -4,23 +4,23 @@ date: 2025-07-17 20:37:37
 categories: 随笔杂记
 tags: 留学申请
 ---
-Simon会在2027fall申请，现在仅作调查，希望能帮助到有需要的人
-本文以计算机方面为主。
-
 ### 资料来源
 
 本文所有资料均来自于TMU官网中[School of Computation,Information and Technology板块](https://www.cit.tum.de/en/cit/home/)，以下简称CIT学院。
 其中具体信息主要来自于其中的[学位项目板块](https://www.cit.tum.de/en/cit/studies/degree-programs/)
 
-### 硕士学制  
-标准学制2年，以课程为主  
-### 在当地工作
-毕业后到慕尼黑外国人事务局（KVR）把原来的学生居留直接换成“18 个月求职居留”（§ 16b Abs. 4 AufenthG）。    
-在这 18 个月内可以无限制打工（不限天数、不限行业），以维持生活并积累相关经验  
-找到与学位匹配的“合格工作”后，可立即把求职居留转换成“就业居留”（§ 18b AufenthG）。   
-只要这份工作持续 24 个月、并缴纳社保，且德语达到 A1，就能申请德国永久居留。（https://www.community.tum.de/wp-content/uploads/2023/04/TU_Flyer_WorkingInGermany2023_WEB.pdf）   
+### 硕士学制
 
-总的而言，德国还是有一定IT缺口的。  
+标准学制2年，以课程为主
+
+### 在当地工作
+
+毕业后到慕尼黑外国人事务局（KVR）把原来的学生居留直接换成“18 个月求职居留”（§ 16b Abs. 4 AufenthG）。
+在这 18 个月内可以无限制打工（不限天数、不限行业），以维持生活并积累相关经验
+找到与学位匹配的“合格工作”后，可立即把求职居留转换成“就业居留”（§ 18b AufenthG）。
+只要这份工作持续 24 个月、并缴纳社保，且德语达到 A1，就能申请德国永久居留。（https://www.community.tum.de/wp-content/uploads/2023/04/TU_Flyer_WorkingInGermany2023_WEB.pdf）
+
+总的而言，德国还是有一定IT缺口的。
 
 ### CIT本科专业
 
@@ -39,8 +39,8 @@ Simon会在2027fall申请，现在仅作调查，希望能帮助到有需要的�
 
 [网址](https://www.cit.tum.de/cit/studium/studiengaenge/bachelor-informatik/studienplan/)
 翻译如下：
-![1752756813069](image/慕尼黑工业大学硕士申请调研/1752756813069.png)
-对Simon个人而言，这个专业是最契合国内本科计算机科学专业培养方案的。
+{% asset_img "课程.png"%}
+对个人而言，这个专业是最契合国内本科计算机科学专业培养方案的。
 
 ### 本科信息工程（Information Engineering）培养方案
 
@@ -90,7 +90,7 @@ TopMath – 精英项目
 
 这个项目主要以数学仿真为主。
 **Please note that CSE is not a computer science program, and students who wish to pursue such a program are not encouraged to apply to CSE. If you are interested in computer science or computer engineering, the Informatics Master's program is for you. The same is true if your primary interest is Robotics or Machine Learning, as these other programs would likely be a better fit for you.**
-Simon对此不感兴趣，故掠过，感兴趣可[访问](https://www.cit.tum.de/en/cit/studies/degree-programs/master-computational-science-engineering/)
+对此不感兴趣，故掠过，感兴趣可[访问](https://www.cit.tum.de/en/cit/studies/degree-programs/master-computational-science-engineering/)
 
 ### 机器人Robotics, Cognition, Intelligence
 
@@ -100,7 +100,7 @@ Simon对此不感兴趣，故掠过，感兴趣可[访问](https://www.cit.tum.d
   6000欧元一学期，一年两学期，大多数工科都一样。
 - 标准学制：四个学期。
 - 教学语言：德语和英语（这就意味着需要德语成绩）
-  Simon不符合语言条件，略过。
+  不符合语言条件，略过。
 
 ### 信息学(Informatics)
 
@@ -128,9 +128,4 @@ Simon对此不感兴趣，故掠过，感兴趣可[访问](https://www.cit.tum.d
     全称 德国驻华使馆文化处留德人员审核部（Akademische Prüfstelle，简称 APS）审核中国学生的学历、成绩单、学位证等材料是否真实有效。
   - 命题小论文：科学论文/论文应长约1000字，并且必须用英语书写
 
-### 总而言之：需要托福GRE过关，如果能在第一轮能力评估中通过（学科契合度以及GPA）就会直接录取，否则就要经过面试和考试。  
-
-### 时间线：
-2025:gre、论文   
-2026初:APS
-2026年末：VPD
+### 总而言之：需要托福GRE过关，如果能在第一轮能力评估中通过（学科契合度以及GPA）就会直接录取，否则就要经过面试和考试。
