@@ -1,0 +1,49 @@
+name: Dev Theme Test
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  theme_test:
+    name: Hexo build & deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout codes
+      uses: actions/checkout@v2
+      with:
+        ref: 'test'
+
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '16.x'
+
+    - name: Cache node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+    - name: Install dependencies
+      run: |
+        npm install -g hexo-cli
+        npm install
+        git clone -b dev https://github.com/blleng/hexo-theme-lx/ themes/lx
+    - name: Generate files
+      run: |
+        hexo clean
+        hexo generate
+    - name: Deploy to gh-page🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        git-config-name: blleng
+        git-config-email: l0bl@outlook.com
+        branch: gh-page # The branch the action should deploy to.
+        folder: public # The folder the action should deploy.

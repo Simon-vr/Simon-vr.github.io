@@ -1,0 +1,138 @@
+### Welcome to Hexo-Theme-Lx
+###Author:blleng(https://github.com/blleng)
+###Version:v0.4.4
+version: 0.4.4
+
+# favicon
+favicon: favicon.ico
+
+# Theme-color for Android Chrome
+theme_color: "#58b77a"
+
+# personal information
+personal_des: Hello, World!
+
+# avatar
+avatar: https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/avatar.min.jpeg
+
+###The options below are images information
+# Home cover
+cover: https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/cover.min.jpeg
+# page cover
+postcover: https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/post_cover.min.jpeg
+# the cover of newer or older post
+pre_post: https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/footer-r.min.jpeg
+nex_post: https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/footer-l.min.jpeg
+
+# menu content
+menu:
+  category: false #category
+  pages:  #the page created by yourself
+    enable: true
+    links:
+      Guestbook: guestbook/
+      About: about/
+  friends:
+    enable: true
+    links:
+      Theme-Lx: https://lx.js.org
+
+
+# social links
+#
+# links:
+# name:
+#   icon: fontawesome icon
+#   link: url
+social:
+  enable: false
+  links:
+  #  GitHub:
+  #    icon: github
+  #    link: https://github.com/yourname
+  #  Email:
+  #    icon: envelope
+  #    link: mailto:your@email.address
+  #  Weibo:
+  #    icon: weibo
+  #    link: https://weibo.com/yourname
+  #  Twitter:
+  #    icon: twitter
+  #    link: https://twitter.com/yourname
+  #  Instagram:
+  #    icon: instagram
+  #    link: https://instagram.com/yourname
+
+# local search
+#install first:
+#'npm install hexo-generator-searchdb -s'
+local_search:
+  enable: false
+  trigger: auto #'auto' or 'manual' 
+  top_n_per_article: 1
+  unescape: false
+  preload: false
+  placeholder: Search...
+
+# footer
+footer:
+
+# Analytics
+google_analytics: #Google ID
+baidu_analytics: #Baidu ID
+
+# Lx use valine as comment system
+# You should create an application in Leancloud to get the appid and appkey
+comment:
+  enable: false
+  appid:
+  appkey:
+  notify: false
+  verify: false
+  placeholder: Say something.
+  avatar: identicon
+  guest_info: nick,mail,link
+  pageSize: 10
+  language: en
+  cdn: https://cdn.jsdelivr.net/npm/valine@1.4.18/dist/Valine.min.js
+
+# Mathjax
+mathjax:
+  enable: true
+  cdn: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js
+
+# FontAwesome-CDN
+font_awesome: https://cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css
+
+# Font
+font:
+  enable: true
+  host: https://fonts.googleapis.com
+  codes: ##the font for codes
+    enable: true
+    family: Fira Code
+  else:  ##the font for others
+    enable: false
+    family: Noto Serif SC
+
+# Custom head code
+custom_head: 
+
+# Custom CSS
+# If true, Lx will load 'source/css/custom.styl'
+custom_css: false
+
+
+
+########### Develop Options ############
+############# Warning ##################
+####### Don't edit options below #######
+## unless you know what you are doing ##
+############# Warning ##################
+
+
+#The dir of Js and Css
+base_file:
+  jquery_cdn: https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js
+  js: https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/js/
+  css: https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/css/main.min.css
