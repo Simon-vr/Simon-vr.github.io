@@ -39,6 +39,7 @@ tags: 留学申请
 
 [网址](https://www.cit.tum.de/cit/studium/studiengaenge/bachelor-informatik/studienplan/)
 翻译如下：
+<<<<<<< HEAD:source/_posts/TMU硕士申请调研.md
 {% asset_img "课程.png"%}
 对个人而言，这个专业是最契合国内本科计算机科学专业培养方案的。
 
@@ -59,6 +60,24 @@ tags: 留学申请
 | **必修研讨课**                                   | 5 CP  | 第 3 学期独立完成科研小课题                    |
 | 添加了一些经管类课程，其他本科专业大同小异，不再赘述。 |       |                                                |
 
+=======
+{% asset_img "本科课程"%}
+对Simon个人而言，这个专业是最契合国内本科计算机科学专业培养方案的。
+### 本科信息工程（Information Engineering）培养方案   
+[官网文件](https://www.cit.tum.de/fileadmin/w00byx/cit/Studium/Studiengaenge/Bachelor_Information_Engineering_Heilbronn/20221213_Studiengangsdokumentation_BSc_IE_Teil_A_AbgabeSenat__1_.pdf)   
+主要内容翻译如下：   
+| 类别             | 学分    | 说明                                    |
+| -------------- | ----- | ------------------------------------- |
+| **必修：计算机科学**   | 90 CP | 信息学核心课程                               |
+| **必修：数学**      | 36 CP | 离散结构、线性代数、微积分、概率论                     |
+| **选修：计算机科学**   | 12 CP | 从实时系统、虚拟机、密码学等模块中选 2 门                |
+| **选修：经济/管理**   | 18 CP | 财务会计、管理科学、物流与生产等 3 门                  |
+| **选修：跨学科/软技能** | 9 CP  | 伦理、创业、跨文化沟通等                          |
+| **毕业论文 + 答辩**  | 15 CP | 第 6 学期完成（12 CP 论文 + 3 CP 答辩）          |
+| **必修实践项目**     | 10 CP | 第 5 学期小组项目（Bachelor Practical Course） |
+| **必修研讨课**      | 5 CP  | 第 3 学期独立完成科研小课题                       |
+添加了一些经管类课程，其他本科专业大同小异，不再赘述。      
+>>>>>>> b0e5e4148fb57dce180ed1ea3b2dd0e458e2d63d:source/_posts/慕尼黑工业大学硕士申请调研.md
 ### CIT硕士专业
 
 信息来自于[学位项目板块](https://www.cit.tum.de/en/cit/studies/degree-programs/)
