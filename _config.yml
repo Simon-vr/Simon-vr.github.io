@@ -96,7 +96,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-simple99
+theme: typo
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
