@@ -33,7 +33,7 @@ menu:
       Guestbook: guestbook/
       About: about/
   friends:
-    enable: true
+    enable: false
     links:
       Theme-Lx: https://lx.js.org
 
