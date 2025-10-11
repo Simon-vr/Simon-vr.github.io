@@ -10,7 +10,7 @@ favicon: favicon.ico
 theme_color: "#58b77a"
 
 # personal information
-personal_des: Hello, World!
+personal_des: this is personal_des
 
 # avatar
 avatar: https://cdn.jsdelivr.net/npm/theme-lx@0.4.4/source/dist/images/avatar.min.jpeg
