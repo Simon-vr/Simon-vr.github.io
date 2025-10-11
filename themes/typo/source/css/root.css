@@ -5,10 +5,10 @@
   --font-color-secondary: #666;
   --font-color-extra: #aaa;
   --font-color-refer: #1c2032;
-
+  /* 背景色修改 */
   --color-hr: #ddd;
   --color-link: #4078F2;
-  --color-background: #fff;
+  --color-background: #d8d8c39a;   
 
   /* 激活与未激活状态 */
   --color-unactive: #eeeeee;

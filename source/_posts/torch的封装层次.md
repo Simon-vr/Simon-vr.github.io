@@ -1,9 +1,8 @@
 ---
 title: torch的封装层次
 categories:
-  - 技术实践
-tags:
   - 转载
+tags:
   - pytorch
 date: 2025-07-12 16:21:40
 ---

@@ -1,8 +1,10 @@
 ---
 title: TUDelt硕士申请调研
 date: 2025-08-07 11:06:38
-categories: 随笔杂记
-tags: 留学申请
+categories: 
+  - 随笔
+tags: 
+  - 留学申请
 ---
 ### 资料来源
 
@@ -64,5 +66,3 @@ https://www.tudelft.nl/en/education/programmes/masters/msc-computer-embedded-sys
 逻辑、算法和数据结构、算法设计、可计算性——至少15个ECTS
 数据和信息系统：
 机器学习、数据管理、网络和数据库技术——至少15个ECTS
-
-#### 其他同上

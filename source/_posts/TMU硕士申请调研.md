@@ -1,8 +1,10 @@
 ---
 title: TMU硕士申请调研
 date: 2025-07-17 20:37:37
-categories: 随笔杂记
-tags: 留学申请
+categories: 
+  - 随笔
+tags: 
+  - 留学申请
 ---
 ### 资料来源
 
@@ -18,27 +20,18 @@ tags: 留学申请
 毕业后到慕尼黑外国人事务局（KVR）把原来的学生居留直接换成“18 个月求职居留”（§ 16b Abs. 4 AufenthG）。
 在这 18 个月内可以无限制打工（不限天数、不限行业），以维持生活并积累相关经验
 找到与学位匹配的“合格工作”后，可立即把求职居留转换成“就业居留”（§ 18b AufenthG）。
-只要这份工作持续 24 个月、并缴纳社保，且德语达到 A1，就能申请德国永久居留。（https://www.community.tum.de/wp-content/uploads/2023/04/TU_Flyer_WorkingInGermany2023_WEB.pdf）
+只要这份工作持续 24 个月、并缴纳社保，且德语达到 A1，就能申请德国永久居留。[pdf说明文件](https://www.community.tum.de/wp-content/uploads/2023/04/TU_Flyer_WorkingInGermany2023_WEB.pdf)
 
 总的而言，德国还是有一定IT缺口的。
 
-### CIT本科专业
+# CIT本科专业
 
 信息来自于[学位项目板块](https://www.cit.tum.de/en/cit/studies/degree-programs/)
 
-- 生物信息学
-- 电气和计算机工程
-- 电子和数据工程（在新加坡TUM亚洲）
-- 信息学
-- 信息学：游戏工程
-- 信息工程
-- 信息系统
-- 数学
-
 ### 本科信息学（Informatics）培养方案（用于检查课程匹配度）
 
-[网址](https://www.cit.tum.de/cit/studium/studiengaenge/bachelor-informatik/studienplan/)
-翻译如下：
+[课程网址](https://www.cit.tum.de/cit/studium/studiengaenge/bachelor-informatik/studienplan/)
+本科培养方案要求翻译如下：
 {% asset_img "课程.png"%}
 对个人而言，这个专业是最契合国内本科计算机科学专业培养方案的。
 
@@ -59,51 +52,10 @@ tags: 留学申请
 | **必修研讨课**                                   | 5 CP  | 第 3 学期独立完成科研小课题                    |
 | 添加了一些经管类课程，其他本科专业大同小异，不再赘述。 |       |                                                |
 
-### CIT硕士专业
+# CIT硕士专业  
+全部信息来自于[学位项目板块](https://www.cit.tum.de/en/cit/studies/degree-programs/)
 
-信息来自于[学位项目板块](https://www.cit.tum.de/en/cit/studies/degree-programs/)
-生物信息学
-生物医学计算
-通信和电子工程
-计算科学与工程
-数据工程和分析
-电气和计算机工程
-财务和信息管理（与TUM管理学院合作）
-绿色电子（在新加坡TUM亚洲）
-信息学
-信息学：游戏工程
-信息工程
-信息系统
-集成电路设计（在新加坡TUM亚洲）
-数学
-数学金融和精算科学
-数据科学中的数学
-运筹学中的数学
-科学与工程中的数学
-微电子和芯片设计
-神经工程——精英硕士课程
-机器人、认知、智能
-软件工程——精英研究生课程
-TopMath – 精英项目
-
-### 计算科学与工程（Computational Science and Engineering）
-
-这个项目主要以数学仿真为主。
-**Please note that CSE is not a computer science program, and students who wish to pursue such a program are not encouraged to apply to CSE. If you are interested in computer science or computer engineering, the Informatics Master's program is for you. The same is true if your primary interest is Robotics or Machine Learning, as these other programs would likely be a better fit for you.**
-对此不感兴趣，故掠过，感兴趣可[访问](https://www.cit.tum.de/en/cit/studies/degree-programs/master-computational-science-engineering/)
-
-### 机器人Robotics, Cognition, Intelligence
-
-[主页](https://www.cit.tum.de/en/cit/studium/studiengaenge/master-robotics-cognition-intelligence/#c2284)
-
-- [学费](https://www.tum.de/studium/studienfinanzierung/studiengebuehren-fuer-studierende-aus-nicht-eu-laendern#c124247)
-  6000欧元一学期，一年两学期，大多数工科都一样。
-- 标准学制：四个学期。
-- 教学语言：德语和英语（这就意味着需要德语成绩）
-  不符合语言条件，略过。
-
-### 信息学(Informatics)
-
+### 信息学(Informatics)硕士专业
 - [主页](https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/)
 - 语言：英语
 - 申请期限
@@ -114,12 +66,13 @@ TopMath – 精英项目
   - 能力评估
     - 在初始阶段，您在学士学位课程中获得的成绩以及您的书面文件将使用积分系统进行评估。根据累积的积分数量，申请人要么立即被录取，要么被拒绝，要么被邀请参加该部门进行的20分钟的招生面试。在某些情况下，对国际学生进行电话面试。
     - 面试代表了程序的第二阶段，有助于确定申请人是否能够成功完成所需的学习课程。您可以在您期望的学位课程的学术和考试条例的附录2中找到更多信息。
-  - GRE分数要求：**GRE and GATE
+  - GRE分数要求：
     Applicants with a Degree from Bangladesh, China, India, Iran or Pakistan have to submit a GRE (General) Test. We have defined required minimum scores, lower scores will not be accepted!
     The required scores are:
     Verbal reasoning: (will not be taken into account anymore)
     Quantitative reasoning: 164
-    Analytical writing: 4.0**
+    Analytical writing: 4.0  
+    即：数学要求164，写作要求4.0，语文无要求
   - VPD：
     德语全称：Vorprüfungsdokumentation
     中文名称：德国大学入学资格预审核证明
@@ -128,4 +81,6 @@ TopMath – 精英项目
     全称 德国驻华使馆文化处留德人员审核部（Akademische Prüfstelle，简称 APS）审核中国学生的学历、成绩单、学位证等材料是否真实有效。
   - 命题小论文：科学论文/论文应长约1000字，并且必须用英语书写
 
-### 总而言之：需要托福GRE过关，如果能在第一轮能力评估中通过（学科契合度以及GPA）就会直接录取，否则就要经过面试和考试。
+
+
+> 总而言之：需要托福GRE过关，如果能在第一轮能力评估中通过（学科契合度以及GPA）就会直接录取，否则就要经过面试和考试。
