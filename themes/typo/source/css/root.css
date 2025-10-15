@@ -15,8 +15,8 @@
   --color-active: #000;
 
   /* 列表项颜色 */
-  --color-list-item-even: #fff;
-  --color-list-item-odd: #fafafa;
+  --color-list-item-even: #d8d8c3da;
+  --color-list-item-odd: #d8d8c341;
 
   /* 文章颜色 */
   --color-post-content: #333333;
