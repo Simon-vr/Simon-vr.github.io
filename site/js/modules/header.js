@@ -12,7 +12,6 @@ const NAV_ITEMS = [
   { href: 'share.html', page: 'share', key: 'nav.share', fallback: 'Curated' },
   { href: 'study.html', page: 'study', key: 'nav.study', fallback: 'Study' },
   { href: 'project.html', page: 'project', key: 'nav.project', fallback: 'Build' },
-  // { href: 'info.html', page: 'info', key: 'nav.info', fallback: 'Connect' },
 ];
 
 function getSiteLang() {
@@ -30,7 +29,7 @@ function t(key, fallback = '') {
 }
 
 function getLangToggleLabel(currentLang) {
-  return currentLang === 'en' ? '中文' : 'EN';
+  return currentLang === 'en' ? '中' : 'EN';
 }
 
 function getLangToggleTitle(currentLang) {
@@ -80,12 +79,23 @@ function getCurrentPageName() {
 
 function markActiveLink() {
   const currentPage = getCurrentPageName();
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  navLinks.forEach((link) => {
-    const page = link.getAttribute('data-page');
-    link.classList.toggle('active', page === currentPage);
+  document.querySelectorAll('.nav-links a').forEach((link) => {
+    link.classList.toggle('active', link.getAttribute('data-page') === currentPage);
   });
+}
+
+function getThemeIconSVG(theme) {
+  // Sun icon for dark mode (click to go light), Moon icon for light mode (click to go dark)
+  if (theme === 'dark') {
+    // Sun
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+  }
+  // Moon
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+}
+
+function getGlobeIconSVG() {
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`;
 }
 
 function renderHeader() {
@@ -96,8 +106,8 @@ function renderHeader() {
   }
 
   const currentLang = getSiteLang();
+  const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
 
-  // Create navigation HTML
   const navHTML = `
     <nav>
       <div class="container">
@@ -106,16 +116,18 @@ function renderHeader() {
           <ul class="nav-links">
             ${createNavLinksHTML()}
           </ul>
-          <button id="siteLangToggle" class="site-lang-toggle" title="${getLangToggleTitle(currentLang)}">
-            <span id="siteLangText">${getLangToggleLabel(currentLang)}</span>
+          <button id="siteLangToggle" class="icon-btn" title="${getLangToggleTitle(currentLang)}">
+            ${getGlobeIconSVG()}
+            <span id="siteLangText" style="font-size:0.6rem;margin-left:0.1rem;font-family:var(--mono-font);letter-spacing:0.02em">${getLangToggleLabel(currentLang)}</span>
           </button>
-          <button id="themeToggle" class="theme-toggle" title="切换主题"><span id="themeIcon">🌙</span></button>
+          <button id="themeToggle" class="icon-btn" title="切换主题">
+            ${getThemeIconSVG(currentTheme)}
+          </button>
         </div>
       </div>
     </nav>
   `;
 
-  // Insert navigation at the beginning of body
   document.body.insertAdjacentHTML('afterbegin', navHTML);
 
   markActiveLink();
@@ -134,13 +146,11 @@ function renderHeader() {
     updateHeaderLanguage();
   });
 
-  // 如果页面已经由 i18n 脚本初始化过，这里再次应用，确保动态注入的 header 文案也同步
   if (window.SiteI18n && typeof window.SiteI18n.applyI18n === 'function') {
     window.SiteI18n.applyI18n(getSiteLang());
   }
 }
 
-// Initialize header when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', renderHeader);
 } else {

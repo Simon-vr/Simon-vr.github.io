@@ -5,7 +5,6 @@
 
 function initTheme() {
   const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
   const getI18nText = (key, fallback) => {
     if (window.SiteI18n && typeof window.SiteI18n.t === 'function') {
       return window.SiteI18n.t(key) || fallback;
@@ -20,84 +19,70 @@ function initTheme() {
     return getI18nText('theme.toDark', '切换到夜间模式');
   };
 
-    function syncGiscusTheme(theme) {
-      const giscusFrame = document.querySelector('iframe.giscus-frame');
-      if (!giscusFrame) return;
-
-      const giscusTheme = theme === 'dark' ? 'dark_dimmed' : 'light';
-      giscusFrame.contentWindow.postMessage(
-        { giscus: { setConfig: { theme: giscusTheme } } },
-        'https://giscus.app'
-      );
+  function getThemeIconSVG(theme) {
+    if (theme === 'dark') {
+      return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
     }
+    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+  }
 
-  
-  if (!themeToggle || !themeIcon) return;
-  
-  /**
-   * 获取初始主题
-   * 优先级：localStorage > 系统偏好 > 默认浅色
-   * @returns {string} 主题名称（light 或 dark）
-   */
+  function syncGiscusTheme(theme) {
+    const giscusFrame = document.querySelector('iframe.giscus-frame');
+    if (!giscusFrame) return;
+
+    const giscusTheme = theme === 'dark' ? 'dark_dimmed' : 'light';
+    giscusFrame.contentWindow.postMessage(
+      { giscus: { setConfig: { theme: giscusTheme } } },
+      'https://giscus.app'
+    );
+  }
+
+  if (!themeToggle) return;
+
   function getInitialTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       return savedTheme;
     }
-    
-    // 检测系统主题偏好
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
       return 'dark';
     }
-
-    // 默认站点首访使用夜间主题
     return 'dark';
   }
-  
-  /**
-   * 应用主题到页面
-   * @param {string} theme - 主题名称（light 或 dark）
-   */
+
   function applyTheme(theme) {
     const root = document.documentElement;
-    
+
     if (theme === 'dark') {
       root.setAttribute('data-theme', 'dark');
-      themeIcon.textContent = '☀️';
       themeToggle.setAttribute('title', getThemeToggleTitle('dark'));
     } else {
       root.setAttribute('data-theme', 'light');
-      themeIcon.textContent = '🌙';
       themeToggle.setAttribute('title', getThemeToggleTitle('light'));
     }
-    
+
+    themeToggle.innerHTML = getThemeIconSVG(theme);
     localStorage.setItem('theme', theme);
     syncGiscusTheme(theme);
   }
-  
-  /**
-   * 切换主题
-   */
+
   function toggleTheme() {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     applyTheme(newTheme);
   }
-  
-  // 初始化主题
+
   const initialTheme = getInitialTheme();
   applyTheme(initialTheme);
-  
-  // 绑定切换事件
+
   themeToggle.addEventListener('click', () => {
     toggleTheme();
     localStorage.setItem('theme-manual', 'true');
   });
-  
-  // 监听系统主题变化（仅在用户未手动设置时）
+
   if (window.matchMedia) {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
+
     if (!localStorage.getItem('theme-manual')) {
       mediaQuery.addEventListener('change', (e) => {
         if (!localStorage.getItem('theme-manual')) {
@@ -115,5 +100,4 @@ function initTheme() {
   });
 }
 
-// 页面加载时初始化主题（在 HTML 脚本前执行以防止闪烁）
 document.addEventListener('DOMContentLoaded', initTheme);

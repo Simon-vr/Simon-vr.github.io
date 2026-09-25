@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Map - simon-vr</title>
+  <link rel="icon" type="image/png" href="icon.png">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -96,12 +97,19 @@
       const mapData = await response.json();
       const map = L.map('mapCanvas').setView(mapData.center || [30, 110], mapData.zoom || 2);
 
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-        attribution: '&copy; Carto',
+      // Esri 暗色底图（无需 API Key），替换原先需要 Key 的 CARTO 底图
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
         maxZoom: 7, // 限制最大放大级别，细节更少、请求更少
         minZoom: 2,  // 最小缩放级别
-        tileSize: 256, // 标准瓦片大小，兼容性最好
-        zoomOffset: 0
+        tileSize: 256 // 标准瓦片大小，兼容性最好
+      }).addTo(map);
+
+      // 地名标注层（同样无需 Key）
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 7,
+        minZoom: 2,
+        tileSize: 256
       }).addTo(map);
 
       const points = [];

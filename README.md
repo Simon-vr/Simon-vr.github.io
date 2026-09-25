@@ -1,70 +1,43 @@
 # simon-vr
 
-*Origin Note*
+对计算机体系结构感兴趣，喜欢从零实现一些底层系统，也记录学习和生活。
 
-## 中文
+网站：<https://simon-vr.github.io/>
 
-> 造一个草原
-> 需要一株苜蓿和一只蜜蜂
-> 一株苜蓿, 一只蜜蜂——
-> 再加一个梦
-> 要是蜜蜂少
-> 光有梦
-> 也成
+## 项目
 
-—— Emily Dickinson
+- **YScore** — 从零手写的 RV32 SoC：Verilog 实现的 5 级多周期 RISC-V 处理器（RV32I + Zicsr）、AXI4-Lite 总线、UART/GPIO/CLINT 外设，并在其上运行裸机实时系统（RTOS）。先在 QEMU 验证，再移植到 Cyclone IV E FPGA。
+  → <https://simon-vr.github.io/YScore/>
+
+- **FPGA-Router-Experiment** — 从零实现的 C++17 FPGA 布线引擎：用 Kruskal 最小生成树拆分多端线网，以 BFS / A* / Mikami-Tabuchi 完成详细布线，并用 OpenMP 并行的 PathFinder 协商布线化解拥塞，附带交互式可视化。
+  → <https://simon-vr.github.io/FPGA-Router-Experiment/>
+
+## 博客
+
+主要记录几类内容：
+
+- **学习资料**：数学分析、线性代数、C/C++、数字电路、物理、离散数学、数据结构等课程的笔记与真题。
+- **读书与观影**：一些书评和电影随笔。
+- **想法与考据**：日常思考、历史与文本方面的小考据。
+
+## 联系
+
+- 邮箱：simony@tutamail.com
+- 也欢迎在文章下方评论区留言。
 
 ---
-
-这首诗放在这里很合适。
-像是一个即将远行的人, 在出发前清点自己的行囊：苜蓿、蜜蜂, 还有一个梦. 一点点梦, 就能想象出远方的草原.
-
-没有什么事情, 比临行前收拾行李更让人感到幸福.
-在这个时刻, 一切都还是刚刚开始的样子：旅途的曲折尚未出现, 收获还没有到来, 但正因为如此, 反而最让人期待.
-
-当最初着手准备这个网站时, 也正是这样的心情.
-无论是自己的生活, 还是这个网站本身, 都还处在一个起点上——就像身处一个并不宽敞的世界, 认真地准备行囊.
-
-和世界上大多数个人博客一样, 我并不指望它会有多高的访问量. 但我仍然期待这些文字被看到.
-记录是一种双向的过程: 当你读到这些文字的那一刻, 它们才真正完成. 就像互联网最初出现时那样——道阻且长, 但只要我们还期待漫长旅途中的相遇, 还等待某种素未谋面的连接, 就能造出我们的草原.
-
-欢迎来到 **simon-vr** .
-这里记录着我的想法、学习和生活.
-
-很高兴你能来, 希望你能在这里找到一些有趣的内容.
-
-2026.2.17
 
 ## English
 
-*simon-vr / Origin Note*
+Interested in computer architecture, and enjoys building low-level systems from scratch. Also writes about study notes and daily life.
 
-> To make a prairie
-> it takes a clover and one bee,
-> one clover, and a bee—
-> and revery.
-> If bees are few.
-> The revery alone will do.
+Website: <https://simon-vr.github.io/>
 
-— Emily Dickinson
+**Projects**
 
----
+- **YScore** — an RV32 SoC written from scratch: a Verilog 5-stage multi-cycle RISC-V core (RV32I + Zicsr), an AXI4-Lite bus, UART/GPIO/CLINT peripherals, running a bare-metal real-time system, verified on QEMU then ported to a Cyclone IV E FPGA.
+- **FPGA-Router-Experiment** — a from-scratch C++17 FPGA routing engine: Kruskal MST net decomposition, BFS / A* / Mikami-Tabuchi detail routing, and an OpenMP parallel PathFinder negotiated router with interactive visualization.
 
-This poem belongs here perfectly.
-Like someone about to set out, counting their belongings before departure: clover, bees, and a dream. Just a little dream is enough to imagine the grasslands ahead.
+**Blog** — study materials (math analysis, linear algebra, C/C++, digital circuits, physics, discrete math, data structures), reading and film notes, and occasional thoughts.
 
-Nothing brings more happiness than packing your bags before a journey.
-At this moment, everything still looks like a beginning: the twists of the road have yet to appear, the harvest has not arrived—but it is precisely because of this that the anticipation feels most alive.
-
-When I first started building this site, it was the very same feeling.
-Whether in my own life or in this website itself, everything still stands at a starting point—like being in a world not yet spacious, earnestly preparing my luggage.
-
-Like most personal blogs in the world, I do not expect high traffic. Yet I still hope these words will be seen.
-Recording is a two-way process: only the moment you read these words do they truly come to life. Just as when the internet first appeared—the road is long and full of obstacles, but as long as we still look forward to encounters along the way, as long as we still wait for some connection with a stranger we have never met, we can build our own grasslands.
-
-Welcome to **simon-vr**.
-Here I record my thoughts, learning, and life.
-
-Glad you came. I hope you find something interesting here.
-
-2026.2.17
+**Contact** — simony@tutamail.com
