@@ -4,7 +4,7 @@ const path = require('path');
 // 创建文件夹并初始化文件
 async function createFolder(className, folderName) {
   // 检查className文件夹是否存在
-  const classPath = path.join(path.dirname(__dirname), 'content', className);
+  const classPath = path.join(path.dirname(__dirname), 'docs', 'content', className);
   if (!fs.existsSync(classPath)) {
     console.error(`className ${className} 不存在`);
     return;

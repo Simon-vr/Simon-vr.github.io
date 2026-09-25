@@ -3,8 +3,8 @@
  * 一键发布脚本
  *
  * 用法：
- *   node scripts/publish.js                 # 重新构建 docs/ 并 git 提交推送
- *   node scripts/publish.js <category> <id> # 先把 handscript.md 转成 HTML，再构建推送
+ *   node scripts/publish.js                 # 更新索引并 git 提交推送
+ *   node scripts/publish.js <category> <id> # 先把 handscript.md 转成 HTML，再更新索引推送
  *
  * 示例：
  *   npm run publish
@@ -43,13 +43,13 @@ function main() {
     process.exit(1);
   }
 
-  // 2. 构建静态站点
+  // 2. 更新索引与数据
   run('node ./scripts/build.js');
 
   // 3. git 提交与推送
   const inGitRepo = runSafe('git rev-parse --is-inside-work-tree') === 'true';
   if (!inGitRepo) {
-    console.log('\n[发布] 当前目录不是 git 仓库，已只完成构建。');
+    console.log('\n[发布] 当前目录不是 git 仓库，已只完成索引更新。');
     console.log('[发布] 如需自动推送，请先执行 git init 并添加远程仓库。');
     return;
   }

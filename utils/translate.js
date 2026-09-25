@@ -341,7 +341,7 @@ async function main() {
   const appConfig = loadAppConfig();
   ensureTranslationConfig(appConfig.translation);
 
-  const contentDir = path.join(path.dirname(__dirname), 'content', args.category, args.id);
+  const contentDir = path.join(path.dirname(__dirname), 'docs', 'content', args.category, args.id);
 
   const summary = {
     metadata: null,

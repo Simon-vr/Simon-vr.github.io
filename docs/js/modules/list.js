@@ -46,15 +46,17 @@ async function loadBlogList(category) {
   setListLoading(blogList);
 
   try {
-    const blogs = await BlogAPI.getBlogList(category, lang);
-    if (blogs.length === 0) {
+    // 读取 content/<category>/index.json + 各篇文章的 metadata.json
+    const posts = await BlogAPI.getCategoryPosts(category);
+    if (posts.length === 0) {
       setListEmpty(blogList);
       return;
     }
 
     blogList.innerHTML = '';
-    blogs.forEach((blog) => {
-      const blogItem = createBlogItem(blog, category, lang);
+    posts.forEach((blog) => {
+      const localized = BlogAPI.localize(blog, lang);
+      const blogItem = createBlogItem(localized, category, lang);
       blogList.appendChild(blogItem);
     });
   } catch (error) {

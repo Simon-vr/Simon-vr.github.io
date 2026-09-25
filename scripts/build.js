@@ -1,32 +1,28 @@
 #!/usr/bin/env node
 /**
- * 纯静态构建脚本
+ * 站点维护脚本（单目录模式）
  *
- * 将 content/ 中的文章与资源、site/ 中的页面模板合并，输出到 docs/，
- * 由 GitHub Pages 直接托管（无需任何后端）。
+ * docs/ 既是源、也是 GitHub Pages 的产物，因此这里不做复制，
+ * 只负责生成前端读取所需的索引与数据文件：
+ *
+ *   docs/content/<category>/index.json   每个分类的文章 id 列表
+ *   docs/data/map-data.json              地图数据
  *
  * 用法：
  *   node scripts/build.js
  *   npm run build
- *
- * 输出结构（docs/）：
- *   index.html / blog.html / log.html / share.html / study.html /
- *   map.html / project.html / info.html
- *   css/ · js/
- *   data/blogs/<category>.json   文章列表（含中英字段）
- *   data/map-data.json           地图数据
- *   content/<category>/<id>/text_CN.html · text_EN.html · assets/
  */
 
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const SITE_DIR = path.join(ROOT, 'site');
-const CONTENT_DIR = path.join(ROOT, 'content');
-const OUT_DIR = path.join(ROOT, 'docs');
+const DOCS_DIR = path.join(ROOT, 'docs');
+const CONTENT_DIR = path.join(DOCS_DIR, 'content');
 
-const SKIP_DIR_NAMES = new Set(['node_modules', '.git', '.DS_Store']);
+// 仅用于写作、不需要发布的文件/目录
+const UNPUBLISHED_FILES = new Set(['handscript.md', '.DS_Store', '.gitkeep']);
+const UNPUBLISHED_DIRS = new Set(['image']);
 
 function log(message) {
   console.log(`[build] ${message}`);
@@ -36,92 +32,41 @@ function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
 
-function removeDir(dir) {
-  fs.rmSync(dir, { recursive: true, force: true });
-}
-
-/** 递归复制目录（跳过系统垃圾文件） */
-function copyDir(src, dest) {
-  if (!fs.existsSync(src)) return;
-  ensureDir(dest);
-  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
-    if (SKIP_DIR_NAMES.has(entry.name)) continue;
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
+/** 清理不应发布的写作中间产物 */
+function cleanUnpublished(dir) {
+  let removed = 0;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      copyDir(srcPath, destPath);
-    } else {
-      fs.copyFileSync(srcPath, destPath);
+      if (UNPUBLISHED_DIRS.has(entry.name)) {
+        fs.rmSync(full, { recursive: true, force: true });
+        removed += 1;
+      } else {
+        removed += cleanUnpublished(full);
+      }
+    } else if (UNPUBLISHED_FILES.has(entry.name)) {
+      fs.rmSync(full, { force: true });
+      removed += 1;
     }
   }
-}
-
-function copyFileIfExists(src, dest) {
-  if (!fs.existsSync(src)) return false;
-  ensureDir(path.dirname(dest));
-  fs.copyFileSync(src, dest);
-  return true;
-}
-
-function readJson(file) {
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
-}
-
-/** 收集某个分类下的文章元数据 */
-function collectCategory(category) {
-  const categoryDir = path.join(CONTENT_DIR, category);
-  const entries = fs.readdirSync(categoryDir, { withFileTypes: true });
-  const blogs = [];
-
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-    const postDir = path.join(categoryDir, entry.name);
-    const metadataPath = path.join(postDir, 'metadata.json');
-    if (!fs.existsSync(metadataPath)) continue;
-
-    let metadata;
-    try {
-      metadata = readJson(metadataPath);
-    } catch (error) {
-      console.warn(`[build] 跳过无法解析的 metadata: ${metadataPath} (${error.message})`);
-      continue;
-    }
-
-    blogs.push({ id: entry.name, ...metadata });
-  }
-
-  blogs.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
-  return blogs;
-}
-
-/** 复制单篇文章的正文与资源 */
-function copyPost(category, id) {
-  const srcDir = path.join(CONTENT_DIR, category, id);
-  const destDir = path.join(OUT_DIR, 'content', category, id);
-
-  copyFileIfExists(path.join(srcDir, 'text_CN.html'), path.join(destDir, 'text_CN.html'));
-  copyFileIfExists(path.join(srcDir, 'text_EN.html'), path.join(destDir, 'text_EN.html'));
-
-  const assetsSrc = path.join(srcDir, 'assets');
-  if (fs.existsSync(assetsSrc)) {
-    copyDir(assetsSrc, path.join(destDir, 'assets'));
-  }
+  return removed;
 }
 
 function main() {
-  if (!fs.existsSync(SITE_DIR)) {
-    throw new Error(`site/ 目录不存在: ${SITE_DIR}`);
+  if (!fs.existsSync(DOCS_DIR)) {
+    throw new Error(`docs/ 目录不存在: ${DOCS_DIR}`);
+  }
+  if (!fs.existsSync(CONTENT_DIR)) {
+    throw new Error(`docs/content/ 目录不存在: ${CONTENT_DIR}`);
   }
 
-  log('清理旧的 docs/ ...');
-  removeDir(OUT_DIR);
-  ensureDir(OUT_DIR);
-
-  log('复制页面模板 site/ -> docs/ ...');
-  copyDir(SITE_DIR, OUT_DIR);
-
   // 关闭 Jekyll 处理，避免下划线开头的文件被忽略，同时加快部署
-  fs.writeFileSync(path.join(OUT_DIR, '.nojekyll'), '');
+  fs.writeFileSync(path.join(DOCS_DIR, '.nojekyll'), '');
+
+  const cleaned = cleanUnpublished(CONTENT_DIR);
+  if (cleaned > 0) {
+    log(`已清理 ${cleaned} 个不需要发布的写作中间产物`);
+  }
 
   const categories = fs
     .readdirSync(CONTENT_DIR, { withFileTypes: true })
@@ -129,28 +74,52 @@ function main() {
     .map((entry) => entry.name)
     .filter((name) => name !== 'map');
 
-  ensureDir(path.join(OUT_DIR, 'data', 'blogs'));
-
   let totalPosts = 0;
+
   for (const category of categories) {
-    const blogs = collectCategory(category);
-    const outFile = path.join(OUT_DIR, 'data', 'blogs', `${category}.json`);
-    fs.writeFileSync(outFile, JSON.stringify(blogs, null, 2), 'utf8');
-    for (const blog of blogs) {
-      copyPost(category, blog.id);
-      totalPosts += 1;
-    }
-    log(`分类 ${category}: ${blogs.length} 篇文章`);
+    const categoryDir = path.join(CONTENT_DIR, category);
+    const ids = fs
+      .readdirSync(categoryDir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .filter((id) => fs.existsSync(path.join(categoryDir, id, 'metadata.json')));
+
+    // 按日期倒序写入索引
+    const posts = ids
+      .map((id) => {
+        try {
+          const metadata = JSON.parse(fs.readFileSync(path.join(categoryDir, id, 'metadata.json'), 'utf8'));
+          return { id, date: metadata.date || '' };
+        } catch (error) {
+          console.warn(`[build] 跳过无法解析的 metadata: ${category}/${id} (${error.message})`);
+          return null;
+        }
+      })
+      .filter(Boolean)
+      .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+      .map((item) => item.id);
+
+    fs.writeFileSync(
+      path.join(categoryDir, 'index.json'),
+      JSON.stringify(posts, null, 2),
+      'utf8'
+    );
+
+    totalPosts += posts.length;
+    log(`分类 ${category}: ${posts.length} 篇文章`);
   }
 
+  // 地图数据：保持前端读取路径 docs/data/map-data.json
   const mapSrc = path.join(CONTENT_DIR, 'map', 'data', 'asset', 'mapdata.json');
-  if (copyFileIfExists(mapSrc, path.join(OUT_DIR, 'data', 'map-data.json'))) {
-    log('已写入 data/map-data.json');
+  if (fs.existsSync(mapSrc)) {
+    ensureDir(path.join(DOCS_DIR, 'data'));
+    fs.copyFileSync(mapSrc, path.join(DOCS_DIR, 'data', 'map-data.json'));
+    log('已更新 data/map-data.json');
   } else {
-    console.warn('[build] 未找到地图数据 mapdata.json');
+    console.warn('[build] 未找到地图数据 content/map/data/asset/mapdata.json');
   }
 
-  log(`完成：共 ${totalPosts} 篇文章，输出目录 docs/`);
+  log(`完成：共 ${totalPosts} 篇文章`);
 }
 
 main();

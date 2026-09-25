@@ -125,7 +125,7 @@ function isFromHandscriptImageDir(src) {
 
 async function md2html(className, folderName) {
   const marked = await getMarked();
-  const baseDir = path.join(path.dirname(__dirname), 'content', className, folderName);
+  const baseDir = path.join(path.dirname(__dirname), 'docs', 'content', className, folderName);
   const mdPath = path.join(baseDir, 'handscript.md');
   const htmlPath = path.join(baseDir, 'text_CN.html');
   const imageDir = path.join(baseDir, 'image', 'handscript');

@@ -1,8 +1,8 @@
 {
   "name": "simon-vr",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "type": "commonjs",
-  "description": "simon-vr 个人网站（纯静态 GitHub Pages）",
+  "description": "simon-vr 个人网站（纯静态 GitHub Pages，单目录 docs/）",
   "main": "scripts/build.js",
   "scripts": {
     "build": "node ./scripts/build.js",

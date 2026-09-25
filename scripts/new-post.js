@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 一键新建文章
+ * 一键新建文章（单目录模式）
  *
  * 用法：
  *   node scripts/new-post.js <category> <id>
@@ -10,8 +10,8 @@
  *   npm run new -- log my_new_post
  *
  * 该命令会：
- *   1. 在 content/<category>/<id>/ 下生成 metadata.json、text_CN.html、text_EN.html、handscript.md
- *   2. 重新构建 docs/
+ *   1. 在 docs/content/<category>/<id>/ 下生成 metadata.json、text_CN.html、text_EN.html、handscript.md
+ *   2. 更新 docs/content/<category>/index.json
  *
  * 后续写作流程：
  *   在 handscript.md 里写 Markdown，然后执行：
@@ -23,6 +23,7 @@ const path = require('path');
 const fs = require('fs');
 
 const ROOT = path.resolve(__dirname, '..');
+const DOCS_CONTENT = path.join(ROOT, 'docs', 'content');
 
 function run(command) {
   execSync(command, { cwd: ROOT, stdio: 'inherit' });
@@ -38,7 +39,7 @@ function main() {
 
   run(`node ./utils/crtblog.js ${category} ${id}`);
 
-  const postDir = path.join(ROOT, 'content', category, id);
+  const postDir = path.join(DOCS_CONTENT, category, id);
   if (!fs.existsSync(postDir)) {
     console.error(`创建失败：${postDir} 不存在`);
     process.exit(1);
@@ -47,9 +48,9 @@ function main() {
   run('node ./scripts/build.js');
 
   console.log('\n下一步：');
-  console.log(`  1. 编辑 content/${category}/${id}/handscript.md 写 Markdown 正文`);
-  console.log(`  2. 编辑 content/${category}/${id}/metadata.json 填写标题/日期/标签`);
-  console.log(`  3. 执行 npm run publish -- ${category} ${id} 生成正文、构建并推送`);
+  console.log(`  1. 编辑 docs/content/${category}/${id}/handscript.md 写 Markdown 正文`);
+  console.log(`  2. 编辑 docs/content/${category}/${id}/metadata.json 填写标题/日期/标签`);
+  console.log(`  3. 执行 npm run publish -- ${category} ${id} 生成正文、更新索引并推送`);
 }
 
 main();

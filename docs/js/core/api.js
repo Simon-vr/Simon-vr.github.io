@@ -1,13 +1,16 @@
 /**
- * API 模块（纯静态版） - 统一封装所有数据访问
+ * API 模块（单目录静态版）
  *
- * GitHub Pages 没有后端，所有数据都来自构建时生成的静态文件：
- *   data/blogs/<category>.json      文章列表（含中英双语字段）
- *   content/<category>/<id>/*.html  文章正文
- *   content/<category>/<id>/assets/ 文章资源（图片/音视频）
- *   data/map-data.json              旅行地图数据
+ * docs/ 既是源也是产物，没有后端、也没有构建期生成的列表 JSON。
+ * 前端直接按需读取 content/ 目录下的文件：
+ *   content/<category>/index.json        该分类的文章 id 列表
+ *   content/<category>/<id>/metadata.json 单篇文章元数据
+ *   content/<category>/<id>/text_CN.html  正文
+ *   content/<category>/<id>/assets/       资源
+ *   content/map/data/asset/mapdata.json   地图数据
  *
- * 所有路径均为相对路径，因此站点部署在根目录或子路径下都能正常工作。
+ * 所有路径均为相对路径，根目录或子路径部署都能正常工作。
+ * index.json 由 scripts/build.js 生成（也可以手动维护）。
  */
 
 const BlogAPI = {
@@ -22,6 +25,32 @@ const BlogAPI = {
       throw new Error(`HTTP error! status: ${response.status} (${path})`);
     }
     return await response.json();
+  },
+
+  /**
+   * 读取某个分类下所有文章的元数据（按日期倒序）
+   * @param {string} category - 分类（study, log, share 等）
+   * @returns {Promise<Array>} 元数据数组，每项含 id
+   */
+  async getCategoryPosts(category) {
+    const index = await this.fetchJson(`content/${category}/index.json`);
+    const ids = Array.isArray(index) ? index : (index.posts || []);
+
+    const results = await Promise.all(
+      ids.map(async (id) => {
+        try {
+          const metadata = await this.fetchJson(`content/${category}/${id}/metadata.json`);
+          return { id, ...metadata };
+        } catch (error) {
+          console.warn(`读取元数据失败: content/${category}/${id}/metadata.json`, error);
+          return null;
+        }
+      })
+    );
+
+    return results
+      .filter(Boolean)
+      .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
   },
 
   /**
@@ -55,8 +84,8 @@ const BlogAPI = {
    */
   async getBlogList(category, lang = 'cn') {
     try {
-      const list = await this.fetchJson(`data/blogs/${category}.json`);
-      return list.map((item) => this.localize(item, lang));
+      const posts = await this.getCategoryPosts(category);
+      return posts.map((item) => this.localize(item, lang));
     } catch (error) {
       console.error(`Error fetching blog list for ${category}:`, error);
       return [];
@@ -72,12 +101,8 @@ const BlogAPI = {
    */
   async getBlogDetail(category, id, lang = 'cn') {
     try {
-      const list = await this.fetchJson(`data/blogs/${category}.json`);
-      const item = list.find((entry) => entry.id === id);
-      if (!item) {
-        throw new Error('Blog not found');
-      }
-      return this.localize(item, lang);
+      const metadata = await this.fetchJson(`content/${category}/${id}/metadata.json`);
+      return this.localize({ id, ...metadata }, lang);
     } catch (error) {
       console.error(`Error fetching blog detail ${category}/${id}:`, error);
       throw error;
