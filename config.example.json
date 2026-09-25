@@ -1,0 +1,8 @@
+{
+  "translation": {
+    "baseUrl": "https://api.moonshot.cn/v1",
+    "apiKey": "在这里填入你的翻译 API Key",
+    "model": "kimi-k2.5",
+    "requestTimeoutMs": 30000
+  }
+}

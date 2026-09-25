@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project - simon-vr</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // 在页面加载前立即应用主题，避免闪烁
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      let theme = savedTheme;
+      if (!theme) {
+        // 首次访问默认夜间
+        theme = 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 data-i18n="page.project.title">Project</h1>
+      <p data-i18n="page.project.subtitle">从零开始的一些工程实践。</p>
+    </div>
+
+    <div class="project-grid">
+      <!-- YScore -->
+      <article class="project-card">
+        <p class="project-kicker">SoC / RISC-V / FPGA</p>
+        <h2>YScore</h2>
+        <div data-lang-block="cn">
+          <p class="project-desc">
+            YScore = Your Simple Core —— 从 0 手写的 RV32 SoC：用 Verilog 实现的 5 级多周期
+            RISC-V 处理器（RV32I + Zicsr），支持 ecall/ebreak 内部异常与 CLINT 定时器中断；
+            自研 AXI4-Lite 主控与 UART/GPIO/CLINT 外设；18KB 指令存储 + 24KB 数据存储；
+            并在其上运行裸机抢占式时间片轮转 RTOS（含 Shell 命令行与 Asteroids 小游戏）。
+            先在 QEMU 上验证，再移植到 Altera Cyclone IV E FPGA。
+          </p>
+        </div>
+        <div data-lang-block="en" hidden>
+          <p class="project-desc">
+            YScore = Your Simple Core — an RV32 SoC written from scratch: a hand-written Verilog
+            5-stage multi-cycle RISC-V processor (RV32I + Zicsr) with ecall/ebreak exceptions and
+            CLINT timer interrupts, a custom AXI4-Lite master, UART/GPIO/CLINT peripherals,
+            18KB instruction + 24KB data memory, and a bare-metal preemptive round-robin RTOS
+            with a shell and an Asteroids mini-game. Verified on QEMU first, then ported to an
+            Altera Cyclone IV E FPGA.
+          </p>
+        </div>
+        <ul class="project-tags">
+          <li>Verilog</li>
+          <li>RISC-V</li>
+          <li>AXI4-Lite</li>
+          <li>RTOS</li>
+          <li>Quartus</li>
+        </ul>
+        <a class="project-link" href="https://simon-vr.github.io/YScore/" target="_blank" rel="noopener">
+          <span data-lang-block="cn">查看项目 ↗</span>
+          <span data-lang-block="en" hidden>Visit project ↗</span>
+        </a>
+      </article>
+
+      <!-- FPGA Router -->
+      <article class="project-card">
+        <p class="project-kicker">EDA / Routing / C++17</p>
+        <h2>FPGA-Router-Experiment</h2>
+        <div data-lang-block="cn">
+          <p class="project-desc">
+            FPGA 协商布线器 —— 从零实现的 C++17 FPGA 布线引擎：以 Kruskal 最小生成树拆分多端线网，
+            用 BFS / A* / Mikami-Tabuchi 完成详细布线，并通过基于 OpenMP 的并行 PathFinder
+            协商布线化解拥塞；附带布线过程的交互式可视化（占用热力图与拥塞图）。
+          </p>
+        </div>
+        <div data-lang-block="en" hidden>
+          <p class="project-desc">
+            FPGA Negotiated Router — a from-scratch C++17 FPGA routing engine. It decomposes
+            multi-terminal nets with a Kruskal MST, routes them with BFS / A* / Mikami-Tabuchi
+            detail routing, and removes congestion with a parallel PathFinder negotiated router
+            driven by OpenMP. Includes an interactive visualization of the routing process
+            (occupancy heatmap and congestion map).
+          </p>
+        </div>
+        <ul class="project-tags">
+          <li>C++17</li>
+          <li>PathFinder</li>
+          <li>BFS / A*</li>
+          <li>OpenMP</li>
+          <li>Visualization</li>
+        </ul>
+        <a class="project-link" href="https://simon-vr.github.io/FPGA-Router-Experiment/" target="_blank" rel="noopener">
+          <span data-lang-block="cn">查看项目 ↗</span>
+          <span data-lang-block="en" hidden>Visit project ↗</span>
+        </a>
+      </article>
+    </div>
+  </div>
+
+  <!-- 按依赖顺序加载脚本 -->
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/i18n.js"></script>
+  <script src="js/core/api.js"></script>
+  <script src="js/modules/header.js"></script>
+  <script src="js/modules/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect - simon-vr</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // 在页面加载前立即应用主题，避免闪烁
+    (function() {
+      const savedTheme = localStorage.getItem('theme');
+      let theme = savedTheme;
+      if (!theme) {
+        // 首次访问默认夜间
+        theme = 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <h1 data-i18n="page.info.title">Connect</h1>
+      <p data-i18n="page.info.subtitle">欢迎来信交流：simony@tutamail.com</p>
+      <p data-i18n="page.info.subtitle2">也欢迎在文章下方评论区留下观点与补充。</p>
+    </div>
+  </div>
+
+  <!-- 按依赖顺序加载脚本 -->
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/i18n.js"></script>
+  <script src="js/core/api.js"></script>
+  <script src="js/modules/header.js"></script>
+  <script src="js/modules/theme.js"></script>
+</body>
+</html>

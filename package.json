@@ -1,0 +1,31 @@
+{
+  "name": "simon-vr",
+  "version": "3.0.0",
+  "type": "commonjs",
+  "description": "simon-vr 个人网站（纯静态 GitHub Pages）",
+  "main": "scripts/build.js",
+  "scripts": {
+    "build": "node ./scripts/build.js",
+    "serve": "node ./scripts/serve.js",
+    "start": "node ./scripts/build.js && node ./scripts/serve.js",
+    "dev": "node ./scripts/serve.js",
+    "new": "node ./scripts/new-post.js",
+    "publish": "node ./scripts/publish.js",
+    "crt": "node ./utils/crtblog.js",
+    "m2h": "node ./utils/md2html.js",
+    "tr": "node ./utils/translate.js"
+  },
+  "keywords": [
+    "personal",
+    "website",
+    "blog",
+    "github-pages",
+    "static"
+  ],
+  "author": "simon-vr",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "marked": "^17.0.1"
+  }
+}

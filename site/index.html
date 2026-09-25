@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index - simon-vr</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // 在页面加载前立即应用主题，避免闪烁
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      let theme = savedTheme;
+      if (!theme) {
+        // 首次访问默认夜间
+        theme = 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+</head>
+
+<body class="home-shell">
+  <div class="hero-ambient" aria-hidden="true">
+    <div class="ambient-orb orb-a"></div>
+    <div class="ambient-orb orb-b"></div>
+    <div class="ambient-grid"></div>
+  </div>
+  <div class="container">
+    <div class="about-section">
+      <div class="about-content">
+        <div data-lang-block="cn">
+          <p class="kicker">Origin Note</p>
+          <blockquote>
+            <p class="quote-line">造一个草原</p>
+            <p class="quote-line">需要一株苜蓿和一只蜜蜂</p>
+            <p class="quote-line">一株苜蓿, 一只蜜蜂——</p>
+            <p class="quote-line">再加一个梦</p>
+            <p class="quote-line">要是蜜蜂少</p>
+            <p class="quote-line">光有梦</p>
+            <p class="quote-line">也成</p>
+          </blockquote>
+          <p class="quote-line">—— Emily Dickinson</p>
+          <hr>
+          <p>这首诗放在这里很合适.
+          像是一个即将远行的人, 在出发前清点自己的行囊：苜蓿、蜜蜂, 还有一个梦. 一点点梦, 就能想象出远方的草原.</p>
+          <p>没有什么事情, 比临行前收拾行李更让人感到幸福.
+            在这个时刻, 一切都还是刚刚开始的样子：旅途的曲折尚未出现, 收获还没有到来, 但正因为如此, 反而最让人期待.</p>
+          <p>当最初着手准备这个网站时, 也正是这样的心情.
+            无论是自己的生活, 还是这个网站本身, 都还处在一个起点上——就像身处一个并不宽敞的世界, 认真地准备行囊.</p>
+          <p>和世界上大多数个人博客一样, 我并不指望它会有多高的访问量. 但我仍然期待这些文字被看到.
+            记录是一种双向的过程: 当你读到这些文字的那一刻, 它们才真正完成. 就像互联网最初出现时那样——道阻且长, 但只要我们还期待漫长旅途中的相遇, 还等待某种素未谋面的连接, 就能造出我们的草原.</p>
+          <p>欢迎来到<strong>simon-vr</strong> .
+            这里记录着我的想法、学习和生活.</p>
+          <p>很高兴你能来, 希望你能在这里找到一些有趣的内容.</p>
+          <p>2026.2.17</p>
+        </div>
+        <div data-lang-block="en" hidden>
+          <p class="kicker">simon-vr / Origin Note</p>
+          <blockquote>
+            <p class="quote-line">To make a prairie</p>
+            <p class="quote-line">it takes a clover and one bee,</p>
+            <p class="quote-line">one clover, and a bee—</p>
+            <p class="quote-line">and revery.</p>
+            <p class="quote-line">If bees are few.</p>
+            <p class="quote-line">The revery alone will do.</p>
+          </blockquote>
+          <p class="quote-line">— Emily Dickinson</p>
+          <hr>
+           <p>This poem belongs here perfectly.
+          Like someone about to set out, counting their belongings before departure: clover, bees, and a dream. Just a little dream is enough to imagine the grasslands ahead.</p>
+          <p>Nothing brings more happiness than packing your bags before a journey.
+            At this moment, everything still looks like a beginning: the twists of the road have yet to appear, the harvest has not arrived—but it is precisely because of this that the anticipation feels most alive.</p>
+          <p>When I first started building this site, it was the very same feeling.
+            Whether in my own life or in this website itself, everything still stands at a starting point—like being in a world not yet spacious, earnestly preparing my luggage.</p>
+          <p>Like most personal blogs in the world, I do not expect high traffic. Yet I still hope these words will be seen.
+            Recording is a two-way process: only the moment you read these words do they truly come to life. Just as when the internet first appeared—the road is long and full of obstacles, but as long as we still look forward to encounters along the way, as long as we still wait for some connection with a stranger we have never met, we can build our own grasslands.</p>
+          <p>Welcome to <strong>simon-vr</strong>.
+            Here I record my thoughts, learning, and life.</p>
+          <p>Glad you came. I hope you find something interesting here.</p>
+          <p>2026.2.17</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 按依赖顺序加载脚本 -->
+  <script src="js/core/i18n.js"></script>
+  <script src="js/modules/header.js"></script>
+  <script src="js/modules/theme.js"></script>
+  <script src="js/core/utils.js"></script>
+  <script src="js/core/api.js"></script>
+  <script>
+    (function () {
+      const body = document.body;
+      body.setAttribute('data-vitality', 'low');
+
+      window.setTimeout(() => {
+        body.setAttribute('data-vitality', 'high');
+      }, 1600);
+
+      const quoteLines = Array.from(document.querySelectorAll('.quote-line'));
+      quoteLines.forEach((line, index) => {
+        window.setTimeout(() => {
+          line.classList.add('quote-line-visible');
+        }, 720 + index * 220);
+      });
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 80) {
+          body.setAttribute('data-vitality', 'high');
+        }
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+
+</html>

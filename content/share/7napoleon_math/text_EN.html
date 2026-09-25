@@ -1,0 +1,111 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathJax 公式渲染测试页</title>
+    <!-- 第一步：配置 MathJax（必须在引入库之前） -->
+    <script type="text/javascript">
+        // 全局配置 MathJax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$']],       // 行内公式：$公式$
+                displayMath: [['$$', '$$']],     // 块级公式：$$公式$$
+                processEscapes: true,            // 允许用 \$ 表示普通美元符号
+                packages: {'[+]': ['base']}      // 加载基础包，确保核心功能
+            },
+            svg: {
+                fontCache: 'global'              // 缓存字体，提升加载速度
+            },
+            startup: {
+                typeset: true                   // 页面加载后自动渲染公式
+            }
+        };
+    </script>
+    <!-- 第二步：引入 MathJax 核心库（稳定版本，CDN 地址可靠） -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" id="MathJax-script"></script>
+</head><body><p>First, Napoleon was not a mathematician; Napoleon's theorem has nothing to do with him. (See note 1)</p>
+<p>Second, at the École Militaire in Paris Napoleon worked through Bézout’s four-volume artillery-mathematics textbook and passed the exam; the series covered math, physics, chemistry, and was roughly today’s high-school level.</p>
+<p>Moreover, according to École Polytechnique star Chambray, in later artillery service all that advanced school math proved useless and was soon forgotten.</p>
+<p>Finally, let’s look at the actual math tools Lieutenant Napoleon used after graduation.</p>
+<p>After passing the artillery exam he was posted to the La Fère regiment stationed at Auxonne, drawing the king’s pay as a royal artillery second lieutenant.</p>
+<p><img src="https://pica.zhimg.com/v2-e1c95d31ab42948756cc08e452ad6f06_1440w.jpg" alt="" style="width: 500px; display: block; margin: 0 auto;"></p>
+<p>Like most grad-student drudges joining a new lab, Second Lieutenant Napoleon Bonaparte was promptly dragooned into the regiment’s state-level project “How to shoot shells from cannons” as front-line test labor.</p>
+<p>His Memorandum on the manner of positioning cannons for bomb-throwing is the report he submitted to his superiors after joining the project; it appears in Masson’s little-known Napoleon: Unpublished Documents (1786-1793).</p>
+<p><img src="https://pic4.zhimg.com/v2-6c2778f19a3ba1029227b2363a833ec1_1440w.jpg" alt="" style="width: 500px; display: block; margin: 0 auto;"></p>
+<p>To let a cannon fire at the 45° high angle of a mortar, a metal frame or earthen mound had to be placed under the trunnions to give the piece a stable platform.</p>
+<p>In the paper Napoleon spends a page or two calculating how, from the length between trunnions and breech, to obtain the height of frame or mound needed for 45° elevation; though only a small part of the whole, it shows his math toolkit in action.</p>
+<p>At first glance the problem looks trivial: 45° means an isosceles right triangle; given hypotenuse L, the leg H—the height of frame or mound—is simply L divided by $\sqrt{2} $.</p>
+<p><img src="https://pic4.zhimg.com/v2-a5065852a311414f48e217c35b4f17b5_1440w.jpg" alt="" style="width: 500px; display: block; margin: 0 auto;"></p>
+<p>For anyone with a calculator that’s easy, but for late-18th-century Frenchmen dividing by the irrational $\sqrt{2}$ was awkward: how many decimal places of $\sqrt{2}$ should one keep? Would the long division be messy?</p>
+<p>From a practical standpoint the simplest fix was to approximate $\sqrt{2}$ by a handy fraction, just as Zu Chongzhi used 22/7 for π; on a battlefield rough-and-ready is good enough.</p>
+<p>So we find Napoleon using this reasoning:</p>
+<blockquote>
+<p>We need only divide the hypotenuse—the distance from just in front of the trunnions to the breech—by 7 inches to obtain the height of frame or mound at 45°.</p>
+</blockquote>
+<p>That sounds mathematically illiterate: hypotenuse divided by 7 inches equals the leg? You’ve divided the unit away!</p>
+<p><img src="https://pic2.zhimg.com/v2-71c48510640f7d5cb4917dd22b10e971_1440w.jpg" alt="" style="width: 500px; display: block; margin: 0 auto;"></p>
+<p>In fact Napoleon erred on the “7,” not the “inches.” With 17 inches appearing in the next line, he clearly wrote “sept” where he meant “dix-sept”; i.e., he thought hypotenuse divided by 17 inches gives the leg.</p>
+<p>The wording reflects 18th-century usage: convert the hypotenuse L to inches, divide that length by 17 inches, and treat the resulting pure number as feet to get the leg H, the required height.</p>
+<p><img src="https://pic4.zhimg.com/v2-bc6448af4d25b04c96874027747e25b1_1440w.jpg" alt="" style="width: 500px; display: block; margin: 0 auto;"></p>
+<p>To clarify: 1 French foot = 12 inches, 1 inch = 12 lines, 1 line = 12 points. In modern terms, divide the hypotenuse by 17/12 to get the leg.</p>
+<p>17/12 ≈ 1.416 666…, very close to $\sqrt{2}$—Napoleon’s own “rough root” approximation.</p>
+<p>What, then, do the four equations he lists mean?</p>
+<p><img src="https://pic2.zhimg.com/v2-a1049462fff86347de8d0bb2d4522a47_1440w.jpg" alt="" style="width: 500px; display: block; margin: 0 auto;"></p>
+<p>With the context they are plainly meant to show that $\sqrt{2}$ is very close to 17/12, so the approximation is safe to use.</p>
+<p>The equations are riddled with holes; the only plausible explanation is that the original manuscript was messy and Masson’s transcribers, no better at math than Napoleon, copied the text correctly but botched the formulas, leaving later readers baffled.</p>
+<p>$$
+HH:LL=1:2
+$$</p>
+<p>$$
+H:L=\sqrt{1}:\sqrt{2}
+$$</p>
+<p>The first step is clear.</p>
+<p>But the copyist then makes a grade-school slip, writing a plus sign where a times sign belongs:</p>
+<p>$$
+H=L+\frac{\sqrt{1}}{\sqrt{2}}
+$$</p>
+<p>How should I put it—if anyone had simply compared these two equivalent expressions, such a blunder would never have happened. Let’s press on with the correct version:</p>
+<p>$$
+H=L\frac{\sqrt{1}}{\sqrt{2}}
+$$</p>
+<p>Next comes the time-honoured artillery-officer trick: take the logarithm; the copyist faithfully wrote down 'take the logarithm'.</p>
+<p>So the four sudden capital L’s are obviously not the hypotenuse length LL, but stand for the base-10 natural logarithm $\lg$; we can therefore break the expression into a few steps for clarity:</p>
+<p>$$
+\lg{H}=\lg({L\frac{\sqrt{1}}{\sqrt{2}}})=\lg{L}+\frac{\lg{1}}{2}-\frac{\lg{2}}{2}=\lg{L}-\frac{\lg{2}}{2}
+$$</p>
+<p>As you can see, Napoleon—or his copyist—once again absent-mindedly turned a minus into a plus.</p>
+<p>By now, though, the game is up: any artillery officer need only consult the log tables everyone carried to find that lg⁡22\frac{\lg{2}}{2} is about 0.150515.</p>
+<p>$$
+即 \lg{H}=\lg{L}-0.150515
+$$</p>
+<p>$$
+H=\frac{L}{10^{0.150515}}
+$$</p>
+<p>Looking up the same tables shows that 10 raised to the power 3.150515 is roughly 1414, i.e. 10^0.150515 ≈ 1.414, so</p>
+<p>$$
+H=\frac{L}{1.414}
+$$</p>
+<p>In other words, Napoleon extracted the square root of 2 from the tables.</p>
+<p>Yet 1.414 is awkward to work with, so Napoleon—using the unit conversions every gunner had drilled for years—converted 1.414 chi to 1 chi 4 cun 11 lignes 7–8 points, a whisker short of 17 cun by 3–4 points, and concluded that $\sqrt{2}$ could be crudely replaced by 17/12 in the reckoning.</p>
+<p>Which is to say: express the hypotenuse in cun, divide that number by 17, then read the result in chi, and you have the height of the metal frame or earth mound at a 45° elevation.</p>
+<p>Thus a formula that never strayed beyond middle-school maths, once it falls into the hands of someone who doesn’t do maths, can be twisted into something no ghost would recognise.</p>
+<p>In short, whatever mathematics actually lived in Napoleon’s head is lost to us; but from the way the tools appear in the documents, any high-school maths teacher could still handle him with ease.</p>
+<blockquote>
+<p>Note 1:</p>
+<p><strong>Napoleon’s Theorem</strong></p>
+<p>Statement of the theorem</p>
+<ol>
+<li><strong>Outer Napoleon triangle</strong>On each side of any triangle ABC,<strong>outwardly</strong>construct an equilateral triangle; the<strong>centres (centroid / circumcentre / orthocentre—in an equilateral triangle they coincide)</strong>of these three equilateral triangles form another equilateral triangle, called the<strong>outer Napoleon triangle</strong> 。</li>
+<li><strong>Inner Napoleon triangle</strong>If the three equilateral triangles are constructed<strong>inward</strong> (on the side inside the original triangle); their centers likewise form an equilateral triangle, called the <strong>inner Napoleon triangle</strong> 。</li>
+<li><strong>Area relation</strong>: the area of the outer Napoleon triangle minus the area of the inner Napoleon triangle equals exactly the area of the original triangle; the circumcircles of the three outward-drawn equilateral triangles meet at a point (the <strong>first Fermat point</strong>), while the inward-drawn ones meet at the <strong>second Fermat point</strong> 。</li>
+</ol>
+<p>The theorem is often credited to the French emperor <strong>Napoleon Bonaparte</strong> (1769–1821), who had a strong interest in mathematics; yet modern historical research suggests its precise statement and proof were more likely worked out by his friend, the mathematician <strong>Lorenzo Mascheroni</strong> or first appeared in mathematical literature between 1820 and 1825, published only after Napoleon’s death.</p>
+</blockquote>
+<h2>References</h2>
+<ol>
+<li><a href="#ref_1_0">^</a>Chambray, G. de, De l'école polytechnique. Paris, 1836, p. 43.</li>
+</ol>
+<blockquote>
+<p>Author: Gustav</p>
+<p>Link:<a href="https://www.zhihu.com/question/1895294218655740513/answer/1918227043616813645">https://www.zhihu.com/question/1895294218655740513/answer/1918227043616813645</a></p>
+</blockquote>
+</body></html>
